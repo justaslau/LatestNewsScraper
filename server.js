@@ -2,15 +2,18 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 
-//const articles = require('./routes/articles');
-//const comments = require('./routes/comments');
+// Loading Route Files
+const articles = require('./routes/articles');
+const comments = require('./routes/comments');
 
+// Assigning Ports for App
 const PORT = process.env.PORT || 8000;
 const app = express();
 
+// Require DB Logins
 const db = require('./config/keys').mongoURI;
 
-// Connect to database
+// Connecting to Mongo Database
 mongoose
     .connect(db, { useNewUrlParser: true })
     .then(() => console.log('Connected to MongoDB.'))
@@ -22,10 +25,11 @@ app.use(express.urlencoded({ extended: false }));
 // Setting Up Static Category
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Use routes
-app.use('/api/articles', require('./routes/articles'));
-app.use('/api/comments', require('./routes/comments'));
+// Assigning Routes
+app.use('/api/articles', articles);
+app.use('/api/comments', comments);
 
+// Opening PORT, Startig Server
 app.listen(PORT, () => console.log(`Server is running on PORT: ${PORT}`));
 
 
