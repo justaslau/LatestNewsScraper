@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 8000;
 const app = express();
 
 // Require DB Logins
-const db = require('./config/keys').mongoURI;
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/Newsfeeder";
 
 // Setting up handlebars
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
@@ -20,7 +20,7 @@ app.set('view engine', 'handlebars');
 
 // Connecting to Mongo Database
 mongoose
-    .connect(db, { useNewUrlParser: true })
+    .connect(MONGODB_URI, { useNewUrlParser: true })
     .then(() => console.log('Connected to MongoDB.'))
     .catch(err => console.log(err));
 
