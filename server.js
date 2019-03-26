@@ -1,4 +1,5 @@
 const express = require('express');
+const exphbs = require("express-handlebars");
 const mongoose = require('mongoose');
 const path = require('path');
 
@@ -13,6 +14,10 @@ const app = express();
 // Require DB Logins
 const db = require('./config/keys').mongoURI;
 
+// Setting up handlebars
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.set('view engine', 'handlebars');
+
 // Connecting to Mongo Database
 mongoose
     .connect(db, { useNewUrlParser: true })
@@ -23,7 +28,7 @@ mongoose
 app.use(express.urlencoded({ extended: false }));
 
 // Setting Up Static Category
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/public/')));
 
 // Assigning Routes
 app.use('/api/articles', articles);

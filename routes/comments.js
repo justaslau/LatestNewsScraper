@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const keys = require('../config/keys');
+const Comment = require('../models/Comment');
 
-// Load Comments model
-
-router.get('/', (req, res) => res.json({ msg: 'Comments route works' }));
+router.post('/add', (req, res) => {
+    const {user, comment, articleId} = req.body;
+    console.log(articleId + " " + user + " " +  comment);
+});
 
 module.exports = router;
