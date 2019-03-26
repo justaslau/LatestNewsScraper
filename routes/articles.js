@@ -63,7 +63,14 @@ const addToDatabase = (scrapedNews, callback) => {
 		db.Article.findOneAndUpdate(
 			{ title },
 			{ summary, image, link, date },
-			{ upsert: true }
+			{ upsert: true },
+			function(err, doc) {
+				if (err) {
+					console.log(err);
+				} else {
+					console.log('added to db');
+				}
+			}
 		);
 	});
 	callback();
