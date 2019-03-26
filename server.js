@@ -33,6 +33,7 @@ app.use(express.static(path.join(__dirname, '/public/')));
 // Assigning Routes
 app.use('/api/articles', articles);
 app.use('/api/comments', comments);
+require("./routes/index.js")(app);
 
 // Opening PORT, Startig Server
 app.listen(PORT, () => console.log(`Server is running on PORT: ${PORT}`));
