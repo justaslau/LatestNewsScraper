@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 8000;
 const app = express();
 
 // Require DB Logins
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/Newsfeeder";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/news";
 
 // Setting up handlebars
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));

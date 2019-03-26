@@ -48,7 +48,6 @@ const scrapeNews = (sport, callback) => {
 			if (!image) {
 				image = 'https://dummyimage.com/348x232';
 			}
-			console.log("scraped");
 			const article = {title, summary, image, date, link, author}
 			news.push(article);
 		});
