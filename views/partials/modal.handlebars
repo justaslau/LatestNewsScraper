@@ -10,6 +10,13 @@
         </button>
       </div>
       <div class="modal-body">
+        <div class="comment-body">
+        {{#each this.comments}}
+        <div class="alert alert-warning" role="alert">
+         <span class="name">{{this.user}}:</span> {{this.comment}}
+        </div>
+        {{/each}}
+        </div>
         <form class="form-{{this.id}}">
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Your Name:</label>

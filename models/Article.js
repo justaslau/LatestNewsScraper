@@ -21,7 +21,13 @@ const ArticleSchema = new Schema({
     date: {
         type: Date,
         default: Date.now
-    }
+    },
+    comments: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: "comments"
+        }
+      ]
 });
 
 // Create Article Model Using Schema

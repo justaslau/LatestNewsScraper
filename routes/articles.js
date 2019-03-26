@@ -2,7 +2,15 @@ const express = require('express');
 const axios = require('axios');
 const router = express.Router();
 const cheerio = require('cheerio');
-const Article = require('../models/Article');
+const db = require("../models");
+
+router.get("/all", function(req, res) {
+db.Article
+				.find()
+				.populate("comments")
+				.sort({ date: -1 })
+				.then(articles => res.json(articles));
+});
 
 router.get("/", function(req, res) {
 
@@ -10,8 +18,10 @@ router.get("/", function(req, res) {
 		// Function to pull all documents from database
 		// Sorted by date, newest on top
 		const pullDocuments = () => {
-			Article
-				.find().sort({date: -1})
+			db.Article
+				.find()
+				.populate("comments")
+				.sort({ date: -1 })
 				.then(articles => res.render("index", { articles }));
 		}
 		addToDatabase(scrapedNews, pullDocuments);
@@ -50,7 +60,7 @@ const scrapeNews = (sport, callback) => {
 const addToDatabase = (scrapedNews, callback) => {
 	scrapedNews.map(article => {
 		const {title, summary, image, link, date} = article;
-		Article.findOneAndUpdate(
+		db.Article.findOneAndUpdate(
 			{ title },
 			{ summary, image, link, date },
 			{ upsert: true }

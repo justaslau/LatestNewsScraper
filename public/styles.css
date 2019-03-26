@@ -5,3 +5,6 @@
 .card-title {
     min-height: 50px;
 }
+.comment-body .name {
+    font-weight: 900;
+}
