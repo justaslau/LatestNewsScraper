@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 8000;
 const app = express();
 
 // Require DB Logins
-const db = require('./config/keys').mongoURI;
+const db = require('./config/keys');
 
 // Setting up handlebars
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
