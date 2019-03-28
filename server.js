@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 8000;
 const app = express();
 
 // Require DB Logins
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/news";
+const db = require('./config/keys').mongoURI;
 
 // Setting up handlebars
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
@@ -20,7 +20,7 @@ app.set('view engine', 'handlebars');
 
 // Connecting to Mongo Database
 mongoose
-    .connect(MONGODB_URI, { useNewUrlParser: true })
+    .connect(db, { useNewUrlParser: true })
     .then(() => console.log('Connected to MongoDB.'))
     .catch(err => console.log(err));
 
@@ -28,12 +28,11 @@ mongoose
 app.use(express.urlencoded({ extended: false }));
 
 // Setting Up Static Category
-app.use(express.static(path.join(__dirname, '/public/')));
+app.use(express.static(path.join(__dirname, '/public')));
 
 // Assigning Routes
-app.use('/api/articles', articles);
-app.use('/api/comments', comments);
-require("./routes/index.js")(app);
+app.use('/', articles);
+app.use('/comments', comments);
 
 // Opening PORT, Startig Server
 app.listen(PORT, () => console.log(`Server is running on PORT: ${PORT}`));
